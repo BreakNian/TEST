@@ -14,10 +14,11 @@ on:
     # 在最新版的Ubuntu系统上运行
     runs-on: ubuntu-latest
 
-    - name: get_current_time
-      run: |
-        export BEIJING_TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S:%3N')"
+    steps:
+      - name: get current time
+        run: |
+          export BEIJING_TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S:%3N')"
 
-    - name: run main
-      run: |
-        echo "${BEIJING_TIME}"
+      - name: run main
+        run: |
+          echo "${BEIJING_TIME}"
