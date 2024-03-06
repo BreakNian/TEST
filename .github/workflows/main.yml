@@ -1,26 +1,23 @@
-name: My Workflow
+name: Test
 
 on:
   schedule:
-    - cron: "*/30 * * * *" # 每30分钟自动执行一次
   workflow_dispatch: # 可以手动执行
 
-env:
-  BEIJING_TIME: ${{ steps.set_beijing_time.outputs.beijing_time }}
-
-jobs:
+  # 检查成绩
   CheckScores:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set Beijing Time
-        id: set_beijing_time
-        run: echo "BEIJING_TIME=$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S:%3N')" >> $GITHUB_ENV
+    name: CheckScores
 
-      - name: Print Beijing Time
-        run: echo "Beijing Time is $BEIJING_TIME"
+    # SyncFork执行完成后运行
+    needs: SyncFork
 
-  BackupMain:
+    # 在最新版的Ubuntu系统上运行
     runs-on: ubuntu-latest
-    steps:
-      - name: Print Beijing Time
-        run: echo "Beijing Time is $BEIJING_TIME"
+
+    - name: get_current_time
+      run: |
+        export BEIJING_TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S:%3N')"
+
+    - name: run main
+      run: |
+        echo "${BEIJING_TIME}"
