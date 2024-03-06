@@ -20,6 +20,7 @@ jobs:
         run: |
           export BEIJING_TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S:%3N')"
           echo "BEIJING_TIME=$BEIJING_TIME" >> $GITHUB_OUTPUT
+          echo "${BEIJING_TIME}"
 
       - name: run main
         run: |
