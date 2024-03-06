@@ -15,6 +15,7 @@ jobs:
       - name: get current time
         run: |
           export BEIJING_TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S:%3N')"
+          echo "${BEIJING_TIME}"
 
       - name: run main
         run: |
