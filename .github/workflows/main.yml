@@ -11,11 +11,17 @@ jobs:
     # 在最新版的Ubuntu系统上运行
     runs-on: ubuntu-latest
 
+    outputs:
+      BEIJING_TIME: ${{ steps.get_current_time.outputs.BEIJING_TIME }}
+
     steps:
       - name: get current time
+        id: get_current_time
+        env:
+          BEIJING_TIME: ${{ needs.job1.outputs.BEIJING_TIME }}
         run: |
           export BEIJING_TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S:%3N')"
-          echo "${BEIJING_TIME}"
+          echo "BEIJING_TIME=$BEIJING_TIME" >> $GITHUB_OUTPUT
 
       - name: run main
         run: |
