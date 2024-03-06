@@ -7,9 +7,6 @@ on:
 job1:
   name: job1
 
-  # SyncFork执行完成后运行
-  needs: SyncFork
-
   # 在最新版的Ubuntu系统上运行
   runs-on: ubuntu-latest
 
