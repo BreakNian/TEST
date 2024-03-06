@@ -28,6 +28,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    steps:
       - name: run main
         run: |
           echo "${{ needs.job1.outputs.BEIJING_TIME }}"
